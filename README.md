@@ -22,3 +22,7 @@ Please enter a command:
 
 Then the user enters the appropriate command (e.x to calculate the P/E ratio for a stock, the user enters the command "per") and
 the programm guides him/her to the next steps.
+
+---------------------------- 
+
+Requirements: To run, JRE 7 and above is needed

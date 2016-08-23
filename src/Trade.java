@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * @author Anastasios Kichidis
  * 
@@ -11,7 +13,7 @@ public class Trade implements Comparable<Trade>{
 	private int price;
 	
 	public Trade(int shares, TradeIndicator indicator, int price){
-		this.timestamp = System.nanoTime();
+		this.timestamp = System.currentTimeMillis();
 		this.shares = shares;
 		this.indicator = indicator;
 		this.price = price;
@@ -41,6 +43,22 @@ public class Trade implements Comparable<Trade>{
 	 */
 	public int compareTo(Trade trade){
 		return - (this.timestamp > trade.timestamp ? 1 : (this.timestamp == trade.timestamp ? 0 : -1));
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder builder = new StringBuilder("timestamp=");
+		
+		builder
+		.append(new Date(timestamp))
+		.append(", indicator=")
+		.append(indicator.value)
+		.append(", shares=")
+		.append(shares)
+		.append(", price=")
+		.append(price);
+		
+		return builder.toString();
 	}
 }
 

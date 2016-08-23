@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -5,6 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 	private static Map<String, Stock> stocksMap = new HashMap<>();
+	private static DecimalFormat format = new DecimalFormat("#.###");
 	
 	public static void main(String[] args) {
 		//initliaze the stocksMap
@@ -100,7 +102,7 @@ public class Main {
 			System.out.print("Please enter ticker price: ");
 			double price = Double.valueOf(scanner.nextLine());
 			
-			System.out.println("Result: " + stock.calculateDividendYield(price) + "\n");
+			System.out.println("Result: " + format.format( stock.calculateDividendYield(price) ) + "\n");
 		}
 		else
 		{
@@ -136,7 +138,7 @@ public class Main {
 			else
 				dividend = stock.getLastDividend();
 				
-			System.out.println("Result: " + stock.calculatePERatio(price, dividend)+ "\n");
+			System.out.println("Result: " + format.format( stock.calculatePERatio(price, dividend) )+ "\n");
 		}
 		else
 		{
@@ -169,7 +171,12 @@ public class Main {
 			int price = Integer.valueOf(scanner.nextLine());
 			
 			//record the trade
-			stock.addTrade(new Trade(shares, TradeIndicator.fromString(tradeIndicator), price));
+			Trade trade = new Trade(shares, TradeIndicator.fromString(tradeIndicator), price);
+			
+			//assign this trade to the provided stock
+			stock.addTrade(trade);
+			
+			System.out.println("New trade added for \"" + stock.getSymbol() + "\": " + trade);
 		}
 		else
 		{
@@ -192,7 +199,7 @@ public class Main {
 		
 		if(stock != null)
 		{
-			System.out.println("Stock price: " + stock.calculateStockPrice(900_000));
+			System.out.println("Stock price: " + format.format( stock.calculateStockPrice(900_000) ));
 		}
 		else
 		{
@@ -222,6 +229,6 @@ public class Main {
 			product *= stockPrice;
 		}
 		
-		System.out.println("GBCE: " + Math.sqrt(product));
+		System.out.println("GBCE: " + format.format( Math.sqrt(product) ));
 	}
 }
